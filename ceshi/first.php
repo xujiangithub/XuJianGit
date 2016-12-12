@@ -10,51 +10,105 @@
 		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
 		<script type="text/javascript" src="js/echarts.js" ></script>
 		<script type="text/javascript" src="js/china.js" ></script>
+		
+		
+		<script type="text/javascript">
+			$(function(){
+				var refreshIndexPage1=function(){
+					windows.location.href='http://localhost/ceshi/first.php';
+				}
+			});
+			
+			//十秒钟刷新一下页面
+			setInterval(refreshIndexPage1,10000);
+		</script>
 </head>
 
-<body >
-    <!-- 设置网页背景图片 -->
-       <div id="alldiv"><img src="img/map5.jpg" /></div> 
-       
+<body style="font-family:'微软雅黑';font-size:25px;color:#ffffff;word-wrap:break-word;behavior:url('csshover.htc');">
+       <div id="alldiv" style="background:#19283f"></div> 
+    <div style="height:60px">
        <div style="width:100%; text-align:center; color:white;"><h1>诸暨市电子商务交易数据分析</h1></div>
        <div style="width:100%; text-align:center; color:white;"><div id="CurrentTime"></div></div>
+	</div>
+	
+	<div class="container-fluid">
+  		<div class="row">
+		
+		<div class="col-md-7">
+			<div id="ditu"></div>
+		</div>
+		<div class="col-md-1">
+			<div style="height:100px"></div>
+            <p><span class="col-md-12" style="font-size:20px">今日交易额/元</span></p>
+            <p><span class="col-md-12" style="font-size:15px">653258</span></p>
+            <p><span class="col-md-12" style="font-size:20px">昨日交易额/元</span></p>
+            <p><span class="col-md-12" style="font-size:15px">592642</span></p>
+		</div>
+		
+		<div class="col-md-4">
+		<div class="col-md-12" style="height:340px;border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+			<div id="youshangjiao" ></div>
+		</div>
+		<div class="col-md-12" style="height:340px;border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+			<div id="huanxingtu" ></div>
+		</div>
+		</div>
+		
+		<div class="col-md-12">
+		<div class="col-md-4" style="height:340px;border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+			<div id="zuoxiajiao"></div>
+		</div>
+		<div class="col-md-4" style="height:340px;border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+			<div class="col-md-12"><h4>热销产品排行榜</h4></div>
+			<table class="table" style="font-size:20px;">
+							<thead>
+								<tr>
+									<th>
+									排名
+									</th>
+									<th>
+										商品名称
+									</th>
+									<th>
+									店铺名称
+									</th>
+									<th>
+									所属乡镇
+									</th>
+								</tr>
+							</thead>
+							<tbody>	
+							<?php for ($i=1;$i<=5;$i++):?>							
+							<tr>
+								<td>
+									No.<?php echo $i; ?>
+								</td>
+								<td>
+									卫衣
+								</td>
+								<td>
+									潮流时装
+								</td>
+								<td>
+									诸暨市
+								</td>
+							</tr>
+							<?php endfor; ?>
+						</tbody>
+					</table>
+		</div>
+		<div class="col-md-4" style="height:340px;border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+			<div id="hengxiangtu" ></div>
+		</div>
+		</div>
+		
+		
+		
+		</div>
+	</div>
 
-        <div class="container-fluid">
-       		<div class="row">
-                <div class="col-md-7" style="text-align:center;">
-                    <div class="col-md-12"><div id="ditu"></div></div>
-                </div>
-                <div class="col-md-1">
-                    <div style="height:100px"></div>
-                    <p><span class="col-md-12">今日交易额/元</span></p>
-                    <p><span class="col-md-12">888888888</span></p>
-                    <p><span class="col-md-12">昨日交易额/元</span></p>
-                    <p><span class="col-md-12">3456789</span></p>
-                </div>
-       			<div class="col-md-4">
-       				<div id="youshangjiao" class="col-md-12"></div>
-       				<div id="huanxingtu" class="col-md-12"></div>
-       			</div>
-       			<div class="col-md-4">
-       				<div id="zuoxiajiao" class="col-md-12"></div>
-       			</div>
-       			<div class="col-md-4">
-                    <div class="col-md-12"><h4>热销产品排行榜</h4></div>
-                    <p><span class="col-md-2">排名</span><span class="col-md-4">商品名称</span><span class="col-md-3">店铺名称</span><span class="col-md-3">所属乡镇</span></p>
-
-                    <div class="col-md-12">
-                    <?php for ($i=1;$i<=5;$i++):?>
-                    <p><span class="col-md-2">No.<?php echo $i; ?></span><span class="col-md-4">454254</span><span class="col-md-3">5345524</span><span class="col-md-3">142522</span></p>
-                    <?php endfor; ?>
-                    </div>
-       			</div>
-       			<div class="col-md-4">
-       				<div id="hengxiangtu" ></div>
-       			</div>
-       			</div>
-       		</div>
-        </div>
-
+	
+	
 <script type="text/javascript">
         function changetime(){
             var ary = Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
@@ -222,7 +276,7 @@ var convertData = function (data) {
     return res;
 };
 
-var color = ['#a6c84c', '#ffa022', '#46bee9'];
+var color = ['#00ffff', '#00ffff', '#00ffff'];
 var series = [];
 [['诸暨', BJData]].forEach(function (item, i) {
     series.push({
@@ -233,7 +287,7 @@ var series = [];
             show: true,
             period: 6,
             trailLength: 0.7,
-            color: '#7fff00',
+            color: '#00ffff',
             symbolSize: 4
         },
         lineStyle: {
@@ -286,7 +340,7 @@ var series = [];
         },
         itemStyle: {
             normal: {
-                color: '#000000'
+                color: '#7CFC00'
             }
         },
         data: item[1].map(function (dataItem) {
@@ -330,12 +384,12 @@ option = {
         roam: true,
         itemStyle: {
             normal: {
-                areaColor: '#48D1CC',
-                borderColor:'#030303',
+                areaColor: '#121C2D',
+                borderColor:'#3C5F88',
                 borderWidth:1,
             },
             emphasis: {
-                areaColor: '#2a333d'
+                areaColor: '#00ffff'
             }
         }
     },
@@ -369,24 +423,76 @@ option = {
     xAxis : [
         {
             type : 'category',
-            data : ['周一','周二','周三','周四','周五','周六','周日']
+            data : ['周一','周二','周三','周四','周五','周六','周日'],
+			axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+              }
         }
     ],
     yAxis : [
         {
-            type : 'value'
+            type : 'value',
+			axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+              }
         }
     ],
     series : [
         {
             name:'直接访问',
             type:'bar',
-            data:[320, 332, 301, 334, 390, 330, 320]
+            data:[320, 332, 301, 334, 390, 330, 320],
+			itemStyle: {
+                    normal: {
+　　　　　　　　　　　　　　//好，这里就是重头戏了，定义一个list，然后根据所以取得不同的值，这样就实现了，
+                        color: function(params) {
+                            // build a color map as your need.
+                            var colorList = [
+                              '#ffff00'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+　　　　　　　　　　　　　　//以下为是否显示，显示位置和显示格式的设置了
+                        label: {
+                            show: true,
+                            position: 'top',
+//                             formatter: '{c}'
+                            formatter: '{b}\n{c}'
+                        }
+                    }
+                }
+　　　　　　　　//设置柱的宽度
+　　　　　　　　//barWidth:70,
         },
         {
             name:'搜索引擎',
             type:'bar',
             data:[862, 1018, 964, 1026, 1679, 1600, 1570],
+			itemStyle: {
+                    normal: {
+　　　　　　　　　　　　　　//好，这里就是重头戏了，定义一个list，然后根据所以取得不同的值，这样就实现了，
+                        color: function(params) {
+                            // build a color map as your need.
+                            var colorList = [
+                              '#EE00EE'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+　　　　　　　　　　　　　　//以下为是否显示，显示位置和显示格式的设置了
+                        label: {
+                            show: true,
+                            position: 'top',
+//                             formatter: '{c}'
+                            formatter: '{b}\n{c}'
+                        }
+                    }
+                },
             markLine : {
                 lineStyle: {
                     normal: {
@@ -483,7 +589,7 @@ option = {
     legend: {
         orient: 'vertical',
         x: 'left',
-        data:wordrepeat
+        data:wordrepeat,
     },
     series: [
         {
@@ -593,7 +699,7 @@ option = {
             label: {
                 normal: {
                     show: true,
-                    position: 'insideRight'
+                    position: 'insideRight',
                 }
             },
             data: []
@@ -623,6 +729,11 @@ option = {
                        sendedNumber.push(result[i].sendedNumber);
                        receivedNumber.push(result[i].receivedNumber);
                     }
+					expressName.push("韵达");    
+                       sendingNumber.push(354);
+                       sendedNumber.push(514);
+                       receivedNumber.push(325);
+					
                     myChart_hengxiangtu.hideLoading();    //隐藏加载动画
                     myChart_hengxiangtu.setOption({        //加载数据图表
                                 tooltip : {
@@ -641,11 +752,23 @@ option = {
         containLabel: true
     },
     xAxis:  {
-        type: 'value'
+        type: 'value',
+		axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+              }
     },
     yAxis: {
         type: 'category',
-        data: expressName
+        data: expressName,
+		axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+              }
     },
     series: [
         {
@@ -705,16 +828,40 @@ option = {
         // 指定图表的配置项和数据
         var option = {
             title: {
-                text: 'ECharts'
+                text: '乡镇销售统计（近一年）',
+				textStyle: {
+					fontSize: 18,
+					fontWeight: 'bolder',
+					color: '#ffffff'          // 主标题文字颜色
+				}
             },
             tooltip: {},
             legend: {
-                data:['销量']
+                data:['销量'],
+				textStyle: {
+					fontSize: 18,
+					fontWeight: 'bolder',
+					color: '#ffffff'         
+				}
+				
             },
             xAxis: {
-                data: []
+                data: [],
+                axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+              }
             },
-            yAxis: {},
+            yAxis: {
+				axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+              }
+			},
             series: [{
                 name: '销量',
                 type: 'bar',
@@ -730,7 +877,7 @@ option = {
          $.ajax({
          type : "GET",  
          async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
-         url : "http://data.cctongle.com/api/toptentown?size=30",    //请求发送到
+         url : "http://data.cctongle.com/api/toptentown?size=8",    //请求发送到
          data : {},
          dataType : "json",        //返回数据形式为json
          success : function(result) {
@@ -751,7 +898,10 @@ option = {
                             // 根据名字对应到相应的系列
                             name: '销量',
                             data: nums
-                        }]
+                        }],
+						itemStyle:{
+							normal:{color:'#00EEEE'}
+						}
                     });
                     
              }
@@ -766,5 +916,6 @@ option = {
          myChart_zuoxiajiao .setOption(option);
     </script>
     
+	
 </body>
 </html>

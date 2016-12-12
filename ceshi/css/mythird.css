@@ -1,23 +1,29 @@
-#ditu {
+﻿#ditu {
     width:100%;
-    height:560px;
+    height:680px;
 }
 
 #kuaxiao {
     width:100%;
-    height:280px;
+    height:340px;
 }
 
 #xiaoqu {
     width:100%;
-    height:280px;
+    height:340px;
 }
 
 #kuajiao {
     width:100%;
-    height:280px;
+    height:340px;
 }
 
+/*使用媒体查询，实现网页适配*/
+@media screen and (max-width: 1000px) {
+    #ditu {
+        display:none;
+    }
+}
 
 /*设置网页背景图片*/
 div#alldiv{ 

@@ -13,63 +13,313 @@
     <script type="text/javascript" src="js/world.js" ></script>
 </head>
 
-<body >
-    <!-- 设置网页背景图片 -->
-       <div id="alldiv"><img src="img/map5.jpg" /></div> 
-       
-        <div class="container-fluid">
-       		<div class="row">
-       		
-       			<div class="col-md-8">
-              <div id="ditu"></div>
-            </div>
-            <div class="col-md-4">
-              <div id="kuaxiao" class="col-md-12"></div>
-              <div id="xiaoqu" class="col-md-12"></div>
-            </div>
-            <div class="col-md-4">
-
-              <div class="col-md-12"><h4>产地及出口国家排行</h4></div>
-              <div class="col-md-12">
-              <p><span class="col-md-2">排名</span><span class="col-md-5">出口国家</span><span class="col-md-5">产出地</span></p>
-              </div>
-
-              <div class="col-md-12">
-              <?php for ($i=1;$i<=5;$i++):?>
-              <p><span class="col-md-2">No.<?php echo $i; ?></span><span class="col-md-5">454254</span><span class="col-md-5">5345524</span></p>
-              <div style="height: 30px;"></div>
-              <?php endfor; ?>
-              </div>
-
-            </div>
-            <div class="col-md-4">
-              <div id="kuajiao"></div>
-            </div>
-            <div class="col-md-4">
-
-              <div class="col-md-12"><h4>出口交易额统计</h4></div>
-              <div class="col-md-12">
-              <p><span class="col-md-4">今日出口额</span><span class="col-md-4">234545</span><span class="col-md-4">万元</span></p>
-              <div style="height: 50px;"></div>
-              <p><span class="col-md-4">当月出口额</span><span class="col-md-4">234545</span><span class="col-md-4">万元</span></p>
-              <div style="height: 50px;"></div>
-              <p><span class="col-md-4">当年出口额</span><span class="col-md-4">234545</span><span class="col-md-4">万元</span></p>
-              <div style="height: 50px;"></div>
-              <p><span class="col-md-4">累计出口额</span><span class="col-md-4">234545</span><span class="col-md-4">万元</span></p>
-              <div style="height: 50px;"></div>
-              </div>
-
-            </div>
-       		</div>
-        </div>
+<body style="font-family:'微软雅黑';font-size:25px;color:#ffffff;word-wrap:break-word;behavior:url('csshover.htc');">
+       <div id="alldiv" style="background:#19283f"></div> 
+	   
+	 <div class="container-fluid">
+       	<div class="row">
+			<div class="col-md-12" style="height:60px">
+				<div style="width:100%; text-align:center; color:white;"><h1>诸暨市跨境电商交易情况</h1></div>
+			</div>
 
 
-
+			<div class="col-md-8">
+				<div class="col-md-12">
+					<div id="ditu"></div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="col-md-12" style="height:340px;border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+					<div id="kuaxiao" class="col-md-12"></div>
+				</div>
+				<div class="col-md-12" style="height:340px;border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+					<div id="xiaoqu" class="col-md-12"></div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="col-md-4" style="height:340px;border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+					<div class="col-md-12"><h4>产地及出口国家排行</h4></div>
+					<table class="table" style="font-size:20px;">
+							<thead>
+								<tr>
+									<th>
+									排名
+									</th>
+									<th>
+										出口国家
+									</th>
+									<th>
+									产出地
+									</th>
+								</tr>
+							</thead>
+							<tbody>	
+							<?php for ($i=1;$i<=5;$i++):?>							
+							<tr>
+								<td>
+									No.<?php echo $i; ?>
+								</td>
+								<td>
+									中国
+								</td>
+								<td>
+									诸暨市
+								</td>
+							</tr>
+							<?php endfor; ?>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-4" style="height:340px;border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+					<div id="kuajiao"></div>
+				</div>
+				<div class="col-md-4" style="height:340px;border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+					<table class="table">
+							<thead>
+								<tr style="height:80px">
+									<th>
+									今日出口额
+									</th>
+									<th>
+										8万元
+									</th>
+								</tr>
+								<tr style="height:80px">
+									<th>
+									当月出口额
+									</th>
+									<th>
+										230万元
+									</th>
+								</tr>
+								<tr style="height:80px">
+									<th>
+									当年出口额
+									</th>
+									<th>
+										1803万元
+									</th>
+								</tr>
+								<tr style="height:80px">
+									<th>
+									累计出口额
+									</th>
+									<th>
+										199992万元
+									</th>
+								</tr>
+							</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>  
+	   
+	   
+	   
 <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart_kuajiao = echarts.init(document.getElementById('kuajiao'));
+
+option = {
+    title: {
+        text: '跨境交易额统计（近一年）',
+        left: 'left',
+		textStyle: {
+					fontSize: 18,
+					fontWeight: 'bolder',
+					color: '#ffffff'          // 主标题文字颜色
+				}
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c}'
+    },
+    legend: {
+        left: 'right',
+        data: ['2的指数', '3的指数']
+    },
+    xAxis: {
+        type: 'category',
+        name: 'x',
+        splitLine: {show: false},
+        data: ['一', '二', '三', '四', '五', '六', '七', '八', '九'],
+		axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+		}
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    yAxis: {
+        type: 'log',
+        name: 'y',
+		axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+		}
+    },
+    series: [
+        {
+            name: '3的指数',
+            type: 'line',
+            data: [1, 3, 9, 27, 81, 247, 741, 2223, 6669]
+        },
+        {
+            name: '2的指数',
+            type: 'line',
+            data: [1, 2, 4, 8, 16, 32, 64, 128, 256]
+        },
+        {
+            name: '1/2的指数',
+            type: 'line',
+            data: [1/2, 1/4, 1/8, 1/16, 1/32, 1/64, 1/128, 1/256, 1/512]
+        }
+    ]
+};
+
+        myChart_kuajiao.setOption(option);
+</script>
+	   
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart_xiaoqu = echarts.init(document.getElementById('xiaoqu'));
+option = {
+  title:{
+    text:'销售渠道统计',
+    x:'center'  ,
+	textStyle: {
+					fontSize: 18,
+					fontWeight: 'bolder',
+					color: '#ffffff'          // 主标题文字颜色
+				}
+  },
+    color: ['#3398DB'],
+    tooltip : {
+        trigger: 'axis',
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis : [
+        {
+            type : 'category',
+            data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+		},
+            axisTick: {
+                alignWithLabel: true
+            }
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+			axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+		}
+        }
+    ],
+    series : [
+        {
+            name:'直接访问',
+            type:'bar',
+            barWidth: '60%',
+            data:[10, 52, 200, 334, 390, 330, 220]
+        }
+    ]
+};
+
+
+        myChart_xiaoqu.setOption(option);
+</script>
+	   
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart_kuaxiao = echarts.init(document.getElementById('kuaxiao'));
+
+option = {
+  title:{
+    text:'跨境销售产品类别',
+    x:'center'  ,
+	textStyle: {
+					fontSize: 18,
+					fontWeight: 'bolder',
+					color: '#ffffff'          // 主标题文字颜色
+				}
+  },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        x: 'left',
+        data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+    },
+    series: [
+        {
+            name:'访问来源',
+            type:'pie',
+            radius: ['50%', '70%'],
+            avoidLabelOverlap: false,
+            label: {
+                normal: {
+                    show: false,
+                    position: 'center'
+                },
+                emphasis: {
+                    show: true,
+                    textStyle: {
+                        fontSize: '30',
+                        fontWeight: 'bold'
+                    }
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[
+                {value:335, name:'直接访问'},
+                {value:310, name:'邮件营销'},
+                {value:234, name:'联盟广告'},
+                {value:135, name:'视频广告'},
+                {value:1548, name:'搜索引擎'}
+            ]
+        }
+    ]
+};
+
+        myChart_kuaxiao.setOption(option);
+</script>
+	   
+	   <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
         var myChart_ditu = echarts.init(document.getElementById('ditu'));
 option = {
-    title : {
+  /*  title : {
         text: '诸暨市跨境电商交易情况',
      //   subtext: 'from United Nations, Total population, both sexes combined, as of 1 July (thousands)',
       //  sublink : 'http://esa.un.org/wpp/Excel-Data/population.htm',
@@ -79,7 +329,7 @@ option = {
             fontSize:50,
             fontFamily: "Microsoft YaHei"
         } 
-    },
+    },*/
     tooltip : {
         trigger: 'item',
         formatter : function (params) {
@@ -295,165 +545,7 @@ option = {
         myChart_ditu.setOption(option);
 </script>
 
-
-<script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart_kuaxiao = echarts.init(document.getElementById('kuaxiao'));
-
-option = {
-  title:{
-    text:'跨境销售产品类别',
-    x:'center'  
-  },
-    tooltip: {
-        trigger: 'item',
-        formatter: "{a} <br/>{b}: {c} ({d}%)"
-    },
-    legend: {
-        orient: 'vertical',
-        x: 'left',
-        data:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
-    },
-    series: [
-        {
-            name:'访问来源',
-            type:'pie',
-            radius: ['50%', '70%'],
-            avoidLabelOverlap: false,
-            label: {
-                normal: {
-                    show: false,
-                    position: 'center'
-                },
-                emphasis: {
-                    show: true,
-                    textStyle: {
-                        fontSize: '30',
-                        fontWeight: 'bold'
-                    }
-                }
-            },
-            labelLine: {
-                normal: {
-                    show: false
-                }
-            },
-            data:[
-                {value:335, name:'直接访问'},
-                {value:310, name:'邮件营销'},
-                {value:234, name:'联盟广告'},
-                {value:135, name:'视频广告'},
-                {value:1548, name:'搜索引擎'}
-            ]
-        }
-    ]
-};
-
-        myChart_kuaxiao.setOption(option);
-</script>
-
-<script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart_xiaoqu = echarts.init(document.getElementById('xiaoqu'));
-option = {
-  title:{
-    text:'销售渠道统计',
-    x:'center'  
-  },
-    color: ['#3398DB'],
-    tooltip : {
-        trigger: 'axis',
-        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-        }
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    xAxis : [
-        {
-            type : 'category',
-            data : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            axisTick: {
-                alignWithLabel: true
-            }
-        }
-    ],
-    yAxis : [
-        {
-            type : 'value'
-        }
-    ],
-    series : [
-        {
-            name:'直接访问',
-            type:'bar',
-            barWidth: '60%',
-            data:[10, 52, 200, 334, 390, 330, 220]
-        }
-    ]
-};
-
-
-        myChart_xiaoqu.setOption(option);
-</script>
-
-<script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-        var myChart_kuajiao = echarts.init(document.getElementById('kuajiao'));
-
-option = {
-    title: {
-        text: '跨境交易额统计（近一年）',
-        left: 'left'
-    },
-    tooltip: {
-        trigger: 'item',
-        formatter: '{a} <br/>{b} : {c}'
-    },
-    legend: {
-        left: 'right',
-        data: ['2的指数', '3的指数']
-    },
-    xAxis: {
-        type: 'category',
-        name: 'x',
-        splitLine: {show: false},
-        data: ['一', '二', '三', '四', '五', '六', '七', '八', '九']
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    yAxis: {
-        type: 'log',
-        name: 'y'
-    },
-    series: [
-        {
-            name: '3的指数',
-            type: 'line',
-            data: [1, 3, 9, 27, 81, 247, 741, 2223, 6669]
-        },
-        {
-            name: '2的指数',
-            type: 'line',
-            data: [1, 2, 4, 8, 16, 32, 64, 128, 256]
-        },
-        {
-            name: '1/2的指数',
-            type: 'line',
-            data: [1/2, 1/4, 1/8, 1/16, 1/32, 1/64, 1/128, 1/256, 1/512]
-        }
-    ]
-};
-
-        myChart_kuajiao.setOption(option);
-</script>
+	   
 </body>
+
 </html>
