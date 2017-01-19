@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="__PUBLIC__/css/mysecond.css" />
+		
+		<link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css" />
+		<script type="text/javascript" src="__PUBLIC__/js/jquery-3.1.1.min.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/js/echarts.js" ></script>
+		<script type="text/javascript" src="__PUBLIC__/js/china.js" ></script>
+		
+
+		
+	</head>
+	<body style="font-family:'微软雅黑';font-size:25px;color:#ffffff;word-wrap:break-word;behavior:url('csshover.htc');" >
+	<div id="alldiv" style="background:#19283f"></div> 
+	
+	<div class="container-fluid">
+       	<div class="row">
+		
+			<div class="col-md-12" style="height:60px">
+				<div style="width:100%; text-align:center; color:white;"><h1>诸暨市电子商务交易数据分析</h1></div>
+				<div style="width:100%; text-align:center; color:white;margin-top:20px;  font-size:15px"><div id="CurrentTime"></div></div>
+			</div>
+	
+			<div class="col-md-4">
+				<div class="col-md-12" style="border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+					<table class="table">
+							<thead>
+								<tr style="height:70px">
+									<th>
+									<img src="__PUBLIC__/img/fir_pic.png" width="30px" height="37px">
+									</th>
+									<th>
+									诸暨市农村电子商务发展状况
+									</th>
+									<th>
+										{$data_dianzi[0]['number_electroni']}个
+									</th>
+								</tr>
+								<tr style="height:80px">
+									<th>
+									<img src="__PUBLIC__/img/sed_pic.png" width="30px" height="37px">
+									</th>
+									<th>
+									涉电商企业：
+									</th>
+									<th>
+										{$data_dianzi[0]['number_electricit']}个
+									</th>
+								</tr>
+								<tr style="height:80px">
+									<th>
+									<img src="__PUBLIC__/img/thi_pic.png" width="30px" height="37px">
+									</th>
+									<th>
+									淘宝付款：
+									</th>
+									<th>
+										{$data_dianzi[0]['number_taobao']}个
+									</th>
+								</tr>
+								<tr style="height:80px">
+									<th>
+									<img src="__PUBLIC__/img/fou_pic.png" width="30px" height="37px">
+									</th>
+									<th>
+									自建品牌数：
+									</th>
+									<th>
+										{$data_dianzi[0]['number_built']}个
+									</th>
+								</tr>
+							</thead>
+					</table>
+				</div>
+				<div class="col-md-12" style="border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+					<div id="cuntao"class="col-md-12" ></div>
+				</div>
+				<div class="col-md-12" style="border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+					<div id="wangxiao"class="col-md-12"></div>
+				</div>
+			</div>
+			
+			<div class="col-md-4" >
+				<div class="col-md-12" style="margin-top:80px">
+						<div id="main" class="col-md-12" style="margin-top:80px"><img style="width:650px;height:650px;" src="__PUBLIC__/img/诸暨2.png"/></div>
+	       	<!--		<div id="main" class="col-md-12" style="margin-top:80px"></div>  -->
+				</div>
+			</div>
+			
+			<div class="col-md-4">
+				<div class="col-md-12" style="border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+					<div class="col-md-12"  ><h4><strong>村淘点业务量排行（上行、下行）</strong></h4></div>
+					<table class="table"  style="font-size:18px;">
+							<thead>
+								<tr>
+									<th>
+									排名
+									</th>
+									<th>
+										站点名
+									</th>
+									<th>
+									上行量
+									</th>
+									<th>
+									下行量
+									</th>
+									<th>
+										站点名
+									</th>
+								</tr>
+							</thead>
+						<tbody>		
+						<if condition="$data_cuntao[0]['id'] eq ''">
+                        <tr><td>暂无数据</td></tr>
+                        <else/>
+                        <foreach name="data_cuntao" item="v">
+                            <tr class="mybg">
+                                <td>No.{$v.ranking}</td>
+                                <td>{$v.upstream_number}号</td>
+                                <td>{$v.site_top}万</td>
+								<td>{$v.site_down}万</td>
+                                <td>{$v.downstream_number}号</td>
+                            </tr>
+                        </foreach>
+                    </if>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-12" style="border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+					<div id="nongxiao" class="col-md-12"></div>
+				</div>
+				<div class="col-md-12" style="border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+					<div class="col-md-12" ><h4><strong>诸暨市店铺销量排行</strong></h4></div>
+					<table class="table" style="font-size:18px;">
+							<thead>
+								<tr>
+									<th>
+									排名
+									</th>
+									<th>
+										公司名称
+									</th>
+									<th>
+									单量（万单）
+									</th>
+									<th>
+									所属乡镇
+									</th>
+								</tr>
+							</thead>
+						<tbody>		
+						<if condition="$data_dianxiao[0]['id'] eq ''">
+                        <tr><td>暂无数据</td></tr>
+                        <else/>
+                        <foreach name="data_dianxiao" item="v">
+                            <tr class="mybg">
+                                <td>No.{$v.ranking}</td>
+                                <td>{$v.company_name}</td>
+                                <td>{$v.quantity}</td>
+								<td>{$v.townname}</td>
+                            </tr>
+                        </foreach>
+                    </if>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+	
+	<script type="text/javascript">
+        function changetime(){
+            var ary = Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+            var Timehtml = document.getElementById('CurrentTime');
+            var date = new Date();
+            Timehtml.innerHTML = ''+date.toLocaleString()+'   '+ary[date.getDay()];
+        }
+        window.onload = function(){
+            changetime();
+            setInterval(changetime,1000);   
+        }
+    </script>
+	   
+	
+		<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart_cuntao = echarts.init(document.getElementById('cuntao'));
+        
+        option = {
+    title : {
+        text: '村淘站点分类统计',
+        x:'center',
+		textStyle : {
+            color: '#ffffff'
+        },
+		left:'left'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        x : 'center',
+        y : 'bottom',
+        data:['rose1','rose2','rose3','rose4','rose5','rose6','rose7','rose8'],
+		textStyle : {
+            color: '#ffffff'
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'面积模式',
+            type:'pie',
+            radius : [30, 110],
+            center : ['60%', '40%'],
+            roseType : 'area',
+            data:[
+                {value:10, name:'rose1'},
+                {value:5, name:'rose2'},
+                {value:15, name:'rose3'},
+                {value:25, name:'rose4'},
+                {value:20, name:'rose5'},
+                {value:35, name:'rose6'},
+                {value:30, name:'rose7'},
+                {value:40, name:'rose8'}
+            ]
+        }
+    ]
+};
+var fenlei=[];    //类别数组（实际用来盛放X轴坐标值）
+var fenleinum=[];
+		 $.ajax({
+         type : "GET",  
+         async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+         url : "http://zj.alphawu.com/datang_data/frontend/web/index.php?r=api/villageoutsite",    //请求发送到
+         data : {},
+         dataType : "json",        //返回数据形式为json
+         success : function(result) {
+             //请求成功时执行该函数内容，result即为服务器返回的json对象
+             if (result) {
+                    for(var i=0;i<result.length;i++){   
+                    	//alert(result[i].townname);
+                    	//alert(result[i].quantity);
+						fenlei.push('邮政站点');
+						fenlei.push('村村通站点');
+						fenlei.push('农村淘宝站点');
+                        fenleinum.push(result[i].post_station);
+						fenleinum.push(result[i].cuncun_station);
+						fenleinum.push(result[i].taobao_station); 
+                    }
+					
+                    myChart_cuntao.hideLoading();    //隐藏加载动画
+                    myChart_cuntao.setOption({
+    title : {
+        text: '村淘站点分类统计',
+        x:'center',
+		textStyle : {
+            color: '#ffffff'
+        },
+		left:'left'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        x : 'center',
+        y : 'bottom',
+        data:fenlei,
+		textStyle : {
+            color: '#ffffff'
+        }
+    },
+    calculable : true,
+    series : [
+        {
+            name:'面积模式',
+            type:'pie',
+            radius : [30, 110],
+            center : ['60%', '40%'],
+            roseType : 'area',
+            data: (function(){
+					var res = [];
+					var len = fenlei.length;
+					while (len--) {
+					res.push({name: fenlei[len],value: fenleinum[len]});
+					}
+					return res;
+					})(),
+					itemStyle: {
+                normal: {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+                          '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                           '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                           '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                        ];
+                        return colorList[params.dataIndex]
+                    }
+                }
+            }
+        }
+    ]
+});
+                    
+             }
+         
+        },
+         error : function(errorMsg) {
+             //请求失败时执行该函数
+         alert("图表请求数据失败!");
+         myChart_cuntao.hideLoading();
+         }
+    })
+    </script>
+	
+	    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart_wangxiao = echarts.init(document.getElementById('wangxiao'));
+        option = {
+    title: {
+        text: '网上销售额统计（近一年）',
+        left: 'center',
+		textStyle : {
+            color: '#ffffff'
+        }
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c}'
+    },
+    legend: {
+        left: 'left',
+        data: ['2的指数', '3的指数'],
+		textStyle : {
+            color: '#ffffff'
+        }
+    },
+    xAxis: {
+        type: 'category',
+        name: 'x',
+        splitLine: {show: false},
+        data: ['一', '二', '三', '四', '五', '六', '七', '八', '九'],
+		axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+		}
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    yAxis: {
+        type: 'log',
+        name: 'y',
+		axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+		}
+    },
+    series: [
+        {
+            name: '3的指数',
+            type: 'line',
+            data: [56, 23, 33, 81, 50]
+        },
+    ]
+};
+var inc_time=[];
+var inc_num=[];
+		 $.ajax({
+         type : "GET",  
+         async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+         url : "http://zj.alphawu.com/datang_data/frontend/web/index.php?r=api/ruralecommerce&size=20",    //请求发送到
+         data : {},
+         dataType : "json",        //返回数据形式为json
+         success : function(result) {
+             //请求成功时执行该函数内容，result即为服务器返回的json对象
+             if (result) {
+                    for(var i=result.length-1;i>=0;i--){
+						inc_time.push(result[i].year + "-" + result[i].month);
+						inc_num.push(result[i].turnover);
+                    }
+					
+                    myChart_wangxiao.hideLoading();    //隐藏加载动画
+                    myChart_wangxiao.setOption({
+    title: {
+        text: '网上销售额统计（近一年）',
+        left: 'center',
+		textStyle : {
+            color: '#ffffff'
+        }
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b} : {c}'
+    },
+    legend: {
+        left: 'left',
+        data: [ '数量'],
+		textStyle : {
+            color: '#ffffff'
+        }
+    },
+    xAxis: {
+        type: 'category',
+        name: 'x',
+        splitLine: {show: false},
+        data: inc_time,
+		axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+		}
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    yAxis: {
+        type: 'log',
+        name: 'y',
+		axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+		}
+    },
+    series: [
+        {
+            name: '数量',
+            type: 'line',
+            data: inc_num
+        },
+    ]
+});
+                    
+             }
+         
+        },
+         error : function(errorMsg) {
+             //请求失败时执行该函数
+         alert("图表请求数据失败!");
+         myChart_wangxiao.hideLoading();
+         }
+    })
+    </script>
+        
+	<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart_nongxiao = echarts.init(document.getElementById('nongxiao'));
+
+option = {
+    title: {
+        text: '农产品销售排行',
+		textStyle: {
+					fontSize: 18,
+					fontWeight: 'bolder',
+					color: '#ffffff'          // 主标题文字颜色
+				}
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    legend: {
+        data: ['2011年', '2012年'],
+		textStyle : {
+            color: '#ffffff'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01],
+		axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+		}
+    },
+    yAxis: {
+        type: 'category',
+        data: ['巴西','印尼','美国','印度','中国'],
+		axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+		}
+    },
+    series: [
+        {
+            name: '2011年',
+            type: 'bar',
+            data: [18203, 23489, 29034, 104970, 131744]
+        },
+    ]
+};
+var agriculture=[];    //类别数组（实际用来盛放X轴坐标值）
+         var number=[];    //销量数组（实际用来盛放Y坐标值）
+         $.ajax({
+         type : "GET",  
+         async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+         url : "http://zj.alphawu.com/datang_data/frontend/web/index.php?r=api/zhujiagriculture&size=10",    //请求发送到
+         data : {},
+         dataType : "json",        //返回数据形式为json
+         success : function(result) {
+             //请求成功时执行该函数内容，result即为服务器返回的json对象
+             if (result) {
+                    for(var i=0;i<result.length;i++){   
+                    	//alert(result[i].townname);
+                    	//alert(result[i].quantity);
+                       agriculture.push(result[i].agriculture);    
+                       number.push(result[i].number);
+                    }
+					
+                    myChart_nongxiao.hideLoading();    //隐藏加载动画
+                    myChart_nongxiao.setOption({
+    title: {
+        text: '农产品销售排行',
+		textStyle: {
+					fontSize: 18,
+					fontWeight: 'bolder',
+					color: '#ffffff'          // 主标题文字颜色
+				}
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    legend: {
+        data: ['2011年', '2012年'],
+		textStyle : {
+            color: '#ffffff'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01],
+		axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+		}
+    },
+    yAxis: {
+        type: 'category',
+        data: agriculture,
+		itemStyle: {
+                normal: {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+                          '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                           '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                           '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                        ];
+                        return colorList[params.dataIndex]
+                    }
+                }
+            },
+		axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+		}
+    },
+    series: [
+        {
+            name: '2011年',
+            type: 'bar',
+            data: number,
+			itemStyle: {
+                normal: {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+                          '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                           '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                           '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                        ];
+                        return colorList[params.dataIndex]
+                    }
+                }
+            }
+        },
+    ]
+});
+                    
+             }
+         
+        },
+         error : function(errorMsg) {
+             //请求失败时执行该函数
+         alert("图表请求数据失败!");
+         myChart_nongxiao.hideLoading();
+         }
+    })
+    </script>
+	
+	</body>
+	
+</html>

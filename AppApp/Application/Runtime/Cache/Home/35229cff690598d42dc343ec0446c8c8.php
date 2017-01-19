@@ -1,0 +1,825 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <link rel="stylesheet" href="/Probably/AppApp/Public/css/myfirst.css" />
+        
+        <link rel="stylesheet" href="/Probably/AppApp/Public/css/bootstrap.min.css" />
+        <script type="text/javascript" src="/Probably/AppApp/Public/js/jquery-3.1.1.min.js" ></script>
+        <script type="text/javascript" src="/Probably/AppApp/Public/js/bootstrap.min.js" ></script>
+        <script type="text/javascript" src="/Probably/AppApp/Public/js/echarts.js" ></script>
+        
+        
+
+</head>
+
+<body style="font-family:'微软雅黑';font-size:25px;color:#ffffff;word-wrap:break-word;behavior:url('csshover.htc');">
+       <div id="alldiv" style="background:#19283f"></div> 
+    <div style="height:60px">
+       <div style="width:100%; text-align:center; color:white;"><h1>诸暨市电子商务交易数据分析</h1></div>
+       <div style="width:100%; text-align:center; color:white; font-size:15px"><div id="CurrentTime"></div></div>
+    </div>
+    
+    <div class="container-fluid">
+        <div class="row">
+        
+        <div class="col-md-8">
+    <!--        <div id="ditu"></div>     -->
+            <div style="height:24px"></div>
+            <iframe id="ditu" src="/Probably/AppApp/index.php/Home/Index/first_ditu.html"  frameborder="0" marginheight="0" marginwidth="0" width="1220px" height="600px"></iframe>
+            <div id="add_on_chart">
+            <table style="margin-left:15px; font-size:20px">
+            <thead>
+            <tr style="height:50px"><th>今日交易额/元</th><th><span id="TodayNum" class="col-md-12" style="font-size:18px" /></th></tr>
+            <tr style="height:50px"><th>昨日交易额/元</th><th><span id="YesterdayNum" class="col-md-12" style="font-size:18px" /></th></tr>
+            <tr style="height:50px"><th>店铺数量</th><th><span id="ShopNum" class="col-md-12" style="font-size:18px" /></th></tr>
+            </thead>
+            </table>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+        <div class="col-md-12" style="border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+            <div id="youshangjiao" ></div>
+        </div>
+        <div class="col-md-12" style="border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+            <div id="huanxingtu" ></div>
+        </div>
+        </div>
+        
+        <div class="col-md-12">
+        <div class="col-md-4" style="border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+            <div id="zuoxiajiao"></div>
+        </div>
+        <div class="col-md-4" style="border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+            <div class="col-md-12"><h4><strong>热销产品排行榜</strong></h4></div>
+            <table class="table" style="font-size:18px;">
+                            <thead>
+                                <tr>
+                                    <th>
+                                    排名
+                                    </th>
+                                    <th>
+                                        商品名称
+                                    </th>
+                                    <th>
+                                    店铺名称
+                                    </th>
+                                    <th>
+                                    所属乡镇
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>     
+                        <?php if($data_rexiao[0]['id'] == ''): ?><tr><td>暂无数据</td></tr>
+                        <?php else: ?>
+                        <?php if(is_array($data_rexiao)): foreach($data_rexiao as $key=>$v): ?><tr class="mybg">
+                                <td><?php echo ($v["ranking"]); ?></td>
+                                <td><?php echo ($v["tradename"]); ?></td>
+                                <td><?php echo ($v["shopname"]); ?></td>
+                                <td><?php echo ($v["townname"]); ?></td>
+                            </tr><?php endforeach; endif; endif; ?>
+                        </tbody>
+                    </table>
+
+
+
+
+
+
+
+        </div>
+        <div class="col-md-4" style="border-right:#ffffff dashed 1px;border-left:#ffffff dashed 1px;border-top:#ffffff dashed 1px;border-bottom:#ffffff dashed 1px">
+            <div id="hengxiangtu" ></div>
+        </div>
+        </div>
+        
+        
+        
+        </div>
+    </div>
+
+<script type="text/javascript">
+function today_and_yesterday(){
+            var today = document.getElementById('TodayNum');
+            var yesterday = document.getElementById('YesterdayNum');
+            $.ajax({
+         type : "GET",  
+         async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+         url : "http://data.cctongle.com/api/saletotal?size=1",    //请求发送到
+         data : {},
+         dataType : "json",        //返回数据形式为json
+         success : function(result) {
+             //请求成功时执行该函数内容，result即为服务器返回的json对象
+             if (result) {
+                //    for(var i=0;i<result.length;i++){
+                        var i=0;
+                        today.innerHTML = result[i].thisDaySaleTotal;
+                        yesterday.innerHTML = result[i].beforeDaySaleTotal;
+                //  }
+                }
+            }
+        })
+        }
+        
+        function shopNum_find(){
+            var shop = document.getElementById('ShopNum');
+            var sum = 0;
+            $.ajax({
+         type : "GET",  
+         async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+         url : "http://zj.alphawu.com/datang_data/frontend/web/index.php?r=api/shopnum",    //请求发送到
+         data : {},
+         dataType : "json",        //返回数据形式为json
+         success : function(result) {
+             //请求成功时执行该函数内容，result即为服务器返回的json对象
+             if (result) {
+                    for(var i=0;i<result.length;i++){
+                        sum += result[i].number_taobao + result[i].number_tianmao + result[i].number_jingdong + result[i].number_other;
+                    }
+                    shop.innerHTML = sum;
+                }
+            }
+        })
+        }
+        function changetime(){
+            var ary = Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+            var Timehtml = document.getElementById('CurrentTime');
+            var date = new Date();
+            Timehtml.innerHTML = ''+date.toLocaleString()+'   '+ary[date.getDay()];
+        }
+        window.onload = function(){
+            changetime();
+            today_and_yesterday();
+            shopNum_find();
+            setInterval(changetime,1000); 
+            setInterval(today_and_yesterday,1000);          
+        }
+    </script>
+
+
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart_youshangjiao = echarts.init(document.getElementById('youshangjiao'));
+
+        // 指定图表的配置项和数据
+        option = {
+            title : {
+        text: '月销售额对比（今年VS去年）',
+        left: 'left',
+        textStyle : {
+            color: '#ffffff'
+        }
+    },
+    tooltip : {
+        trigger: 'axis',
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    legend: {
+        data:['今年','去年'],
+        left:'right',
+        textStyle:{
+            color:'#ffffff'
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis : [
+        {
+            type : 'category',
+            data : ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
+            axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+              }
+        }
+    ],
+    yAxis : [
+        {
+            type : 'value',
+            axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+              }
+        }
+    ],
+    series : [
+        {
+            name:'今年',
+            type:'bar',
+            data:[320, 332, 301, 334, 390, 330, 320],
+            itemStyle: {
+                normal: {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+                          '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                           '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                           '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                        ];
+                        return colorList[params.dataIndex]
+                    }
+                }
+            }
+　　　　　　　　//设置柱的宽度
+　　　　　　　　//barWidth:70,
+        },
+        {
+            name:'去年',
+            type:'bar',
+            data:[862, 1018, 964, 1026, 1679, 1600, 1570],
+            itemStyle: {
+                normal: {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+                          '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                           '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                           '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                        ];
+                        return colorList[params.dataIndex]
+                    }
+                }
+            },
+            markLine : {
+                lineStyle: {
+                    normal: {
+                        type: 'dashed'
+                    }
+                },
+                data : [
+                    [{type : 'min'}, {type : 'max'}]
+                ]
+            }
+        }
+    ]
+};
+
+        var theyear=[];
+         var lastyear=[];
+
+        $.ajax({
+         type : "GET",  
+         async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+         url : "http://zj.alphawu.com/datang_data/frontend/web/index.php?r=api/monthlysales",    //请求发送到
+         data : {},
+         dataType : "json",        //返回数据形式为json
+         success : function(result) {
+             //请求成功时执行该函数内容，result即为服务器返回的json对象
+             if (result) {
+                    for(var i=0;i<result.length;i++){   
+                       theyear.push(result[i].theyear_january);
+                       theyear.push(result[i].theyear_february);
+                       theyear.push(result[i].theyear_march);
+                       theyear.push(result[i].theyear_april);
+                       theyear.push(result[i].theyear_may);
+                       theyear.push(result[i].theyear_june);
+                       theyear.push(result[i].theyear_july);
+                       theyear.push(result[i].theyear_august);
+                       theyear.push(result[i].theyear_september);
+                       theyear.push(result[i].theyear_october);
+                       theyear.push(result[i].theyear_november);
+                       theyear.push(result[i].theyear_december);
+                       
+                       
+                       lastyear.push(result[i].lastyear_january);  
+                       lastyear.push(result[i].lastyear_february);  
+                       lastyear.push(result[i].lastyear_march);  
+                       lastyear.push(result[i].lastyear_april);  
+                       lastyear.push(result[i].lastyear_may);  
+                       lastyear.push(result[i].lastyear_june);  
+                       lastyear.push(result[i].lastyear_july);  
+                       lastyear.push(result[i].lastyear_august);  
+                       lastyear.push(result[i].lastyear_september);  
+                       lastyear.push(result[i].lastyear_october);  
+                       lastyear.push(result[i].lastyear_november);  
+                       lastyear.push(result[i].lastyear_december);  
+                    }
+                    myChart_youshangjiao .hideLoading();    //隐藏加载动画
+                    myChart_youshangjiao .setOption({        //加载数据图表
+                    
+                        series : [
+        {
+            name:'今年',
+            type:'bar',
+            data:theyear,
+            itemStyle: {
+                normal: {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+                          '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                           '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                           '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                        ];
+                        return colorList[params.dataIndex]
+                    }
+                }
+            }
+　　　　　　　　//设置柱的宽度
+　　　　　　　　//barWidth:70,
+        },
+        {
+            name:'去年',
+            type:'bar',
+            data:lastyear,
+            itemStyle: {
+                normal: {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+                          '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                           '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                           '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                        ];
+                        return colorList[params.dataIndex]
+                    }
+                }
+            },
+            markLine : {
+                lineStyle: {
+                    normal: {
+                        type: 'dashed'
+                    }
+                },
+                data : [
+                    [{type : 'min'}, {type : 'max'}]
+                ]
+            }
+        }
+        ]
+     });
+                    
+             }
+         
+        },
+         error : function(errorMsg) {
+             //请求失败时执行该函数
+         //alert("图表请求数据失败!");
+         myChart_youshangjiao .hideLoading();
+         }
+    })
+        // 使用刚指定的配置项和数据显示图表。
+        myChart_youshangjiao.setOption(option);
+    </script>
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart_huanxingtu = echarts.init(document.getElementById('huanxingtu'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title : {
+        text: '产品销售情况统计',
+        left: 'center',
+        textStyle : {
+            color: '#ffffff'
+        }
+    },
+            tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        x: 'left',
+        data:[]
+    },
+    series: [
+        {
+            name:'访问来源',
+            type:'pie',
+            selectedMode: 'single',
+            radius: [0, '30%'],
+
+            label: {
+                normal: {
+                    position: 'inner'
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[]
+        },
+        {
+            name:'访问来源',
+            type:'pie',
+            radius: ['40%', '55%'],
+
+            data:[]
+        }
+    ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart_huanxingtu .showLoading();
+         var word=[];    //类别数组（实际用来盛放X轴坐标值）
+         var wordrepeat=[];  
+         var quality=[];    //销量数组（实际用来盛放Y坐标值）
+         var sum;
+           
+         $.ajax({
+         type : "GET",  
+         async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+         url : "http://data.cctongle.com/api/keyword?size=10",    //请求发送到
+         data : {},
+         dataType : "json",        //返回数据形式为json
+         success : function(result) {
+             //请求成功时执行该函数内容，result即为服务器返回的json对象
+             if (result) {
+                wordrepeat.push('裤子');
+                    for(var i=0;i<result.length;i++){   
+                        //alert(result[i].townname);
+                        //alert(result[i].quantity);
+                       word.push(result[i].word);    //挨个取出类别并填入类别数组
+                       wordrepeat.push(result[i].word);
+                       quality.push(result[i].quality);  //挨个取出销量并填入销量数组
+                       sum+=result[i].quality;
+                    }
+                    myChart_huanxingtu .hideLoading();    //隐藏加载动画
+                    myChart_huanxingtu .setOption({        //加载数据图表
+                        tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}: {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        x: 'left',
+        data:wordrepeat,
+        textStyle:{
+            color:'#ffffff'
+        }
+    },
+    series: [
+        {
+            name:'访问来源',
+            type:'pie',
+            selectedMode: 'single',
+            radius: [0, '30%'],
+
+            label: {
+                normal: {
+                    position: 'inner'
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data:[
+                {value:sum, name:'裤子'}
+            ]
+        },
+        {
+            name:'访问来源',
+            type:'pie',
+            radius: ['40%', '55%'],
+
+            data: (function(){
+                    var res = [];
+                    var len = word.length;
+                    while (len--) {
+                    res.push({name: word[len],value: quality[len]});
+                    }
+                    return res;
+                    })(),
+                    itemStyle: {
+                normal: {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+                          '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                           '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                           '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                        ];
+                        return colorList[params.dataIndex]
+                    }
+                }
+            }
+        }
+    ]
+                    });  
+             }
+        },
+         error : function(errorMsg) {
+             //请求失败时执行该函数
+         alert("图表请求数据失败!");
+         myChart_huanxingtu .hideLoading();
+         }
+    })
+         myChart_huanxingtu .setOption(option);
+    </script>
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart_hengxiangtu = echarts.init(document.getElementById('hengxiangtu'));
+
+        // 指定图表的配置项和数据
+option = {
+    title : {
+        text: '物流发货统计（件）',
+        left: 'left',
+        textStyle : {
+            color: '#ffffff'
+        }
+    },
+    tooltip : {
+        trigger: 'axis',
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    legend: {
+        data: ['正在发送', '已发送'],
+        textStyle:{
+            color:'#ffffff'
+        },
+        left:'right'
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis:  {
+        type: 'value'
+    },
+    yAxis: {
+        type: 'category',
+        data: []
+    },
+    series: [
+        {
+            name: '正在发送',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'insideRight'
+                }
+            },
+            data: []
+        },
+        {
+            name: '已发送',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'insideRight'
+                }
+            },
+            data: []
+        }
+    ]
+};
+        myChart_hengxiangtu.setOption(option);
+         myChart_hengxiangtu.showLoading();
+         var expressname=[];    //类别数组（实际用来盛放X轴坐标值）
+         var quantity_jzh=[];    //销量数组（实际用来盛放Y坐标值）
+         var quantity_other=[]; 
+         $.ajax({
+         type : "GET",  
+         async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+         url : "http://zj.alphawu.com/datang_data/frontend/web/index.php?r=api/logisticsdelivery&size=10",    //请求发送到
+         data : {},
+         dataType : "json",        //返回数据形式为json
+         success : function(result) {
+             //请求成功时执行该函数内容，result即为服务器返回的json对象
+             if (result) {
+                    for(var i=0;i<result.length;i++){   
+                        //alert(result[i].townname);
+                        //alert(result[i].quantity);
+                       expressname.push(result[i].expressname);    
+                       quantity_jzh.push(result[i].quantity_jzh);
+                       quantity_other.push(result[i].quantity_other);
+                    }
+                    
+                    myChart_hengxiangtu.hideLoading();    //隐藏加载动画
+                    myChart_hengxiangtu.setOption({        //加载数据图表
+                                tooltip : {
+        trigger: 'axis',
+        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        }
+    },
+    legend: {
+        data: ['正在发送', '已发送']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis:  {
+        type: 'value',
+        axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+              }
+    },
+    yAxis: {
+        type: 'category',
+        data: expressname,
+        axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+              }
+    },
+    series: [
+        {
+            name: '正在发送',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'insideRight'
+                }
+            },
+            data: quantity_jzh,
+            itemStyle: {
+                normal: {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+                          '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                           '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                           '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                        ];
+                        return colorList[params.dataIndex]
+                    }
+                }
+            }
+        },
+        {
+            name: '已发送',
+            type: 'bar',
+            stack: '总量',
+            label: {
+                normal: {
+                    show: true,
+                    position: 'insideRight'
+                }
+            },
+            data: quantity_other,
+            itemStyle: {
+                normal: {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+                          '#9BCA63','#FAD860','#F3A43B','#60C0DD','#D7504B',
+                          '#C6E579','#F4E001','#F0805A','#C1232B','#B5C334',
+                          '#FCCE10','#E87C25','#27727B','#FE8463','#26C0C0'
+                        ];
+                        return colorList[params.dataIndex]
+                    }
+                }
+            }
+        }
+    ]
+                    });
+                    
+             }
+         
+        },
+         error : function(errorMsg) {
+             //请求失败时执行该函数
+         alert("图表请求数据失败!");
+         myChart_hengxiangtu.hideLoading();
+         }
+    })
+    </script>
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart_zuoxiajiao = echarts.init(document.getElementById('zuoxiajiao'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '乡镇销售统计（近一年）',
+                textStyle: {
+                    fontSize: 18,
+                    fontWeight: 'bolder',
+                    color: '#ffffff'          // 主标题文字颜色
+                }
+            },
+            tooltip: {},
+            legend: {
+                data:['销量'],
+                textStyle: {
+                    fontSize: 18,
+                    fontWeight: 'bolder',
+                    color: '#ffffff'         
+                }
+                
+            },
+            xAxis: {
+                data: [],
+                axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+              }
+            },
+            yAxis: {
+                axisLabel: {
+                     show: true,
+                     textStyle: {
+                     color: '#fff'
+                }
+              }
+            },
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data: []
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart_zuoxiajiao .showLoading();
+         var names=[];    //类别数组（实际用来盛放X轴坐标值）
+         var nums=[];    //销量数组（实际用来盛放Y坐标值）
+           
+         $.ajax({
+         type : "GET",  
+         async : true,            //异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
+         url : "http://data.cctongle.com/api/toptentown?size=8",    //请求发送到
+         data : {},
+         dataType : "json",        //返回数据形式为json
+         success : function(result) {
+             //请求成功时执行该函数内容，result即为服务器返回的json对象
+             if (result) {
+                    for(var i=0;i<result.length;i++){   
+                        //alert(result[i].townname);
+                        //alert(result[i].quantity);
+                       names.push(result[i].townname);    //挨个取出类别并填入类别数组
+                       nums.push(result[i].quantity);  //挨个取出销量并填入销量数组
+                    }
+                    myChart_zuoxiajiao .hideLoading();    //隐藏加载动画
+                    myChart_zuoxiajiao .setOption({        //加载数据图表
+                        xAxis: {
+                            data: names
+                        },
+                        series: [{
+                            // 根据名字对应到相应的系列
+                            name: '销量',
+                            data: nums
+                        }],
+                        itemStyle: {
+                normal: {
+                    color: function(params) {
+                        // build a color map as your need.
+                        var colorList = [
+                          '#C1232B','#B5C334','#FCCE10','#E87C25','#27727B',
+                           '#FE8463','#9BCA63','#FAD860','#F3A43B','#60C0DD',
+                           '#D7504B','#C6E579','#F4E001','#F0805A','#26C0C0'
+                        ];
+                        return colorList[params.dataIndex]
+                    }
+                }
+            }
+                    });
+                    
+             }
+         
+        },
+         error : function(errorMsg) {
+             //请求失败时执行该函数
+         alert("图表请求数据失败!");
+         myChart_zuoxiajiao .hideLoading();
+         }
+    })
+         myChart_zuoxiajiao .setOption(option);
+    </script>
+    
+    
+</body>
+</html>

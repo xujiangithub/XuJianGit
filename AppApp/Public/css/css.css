@@ -1,0 +1,67 @@
+@charset "utf-8";
+/* CSS Document */
+html{overflow:hidden;}
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+body{font-family:"微软雅黑";font-size:12px;color:#000000;word-wrap:break-word;behavior:url("csshover.htc");overflow:hidden;}
+button,input,select,textarea{font:12px/1.5  Arial, "宋体", Helvetica,  Verdana, sans-serif;word-wrap:break-word;color:#565756;}
+ul,li{list-style:none;margin:0;padding:0;}
+h1, h2, h3, h4, h5, h6{font-weight:normal;font-size:100%;} 
+img{border:none;border:0;vertical-align:middle;}
+a{text-decoration:none;outline:none;}
+p{margin:0;padding:0;}
+input,select,textarea{vertical-align:middle;*font-size:100%;}
+input{margin:0;outline:none;padding:0;}
+input::-ms-clear{display:none;}
+.clearfix:after{
+     content:".";       
+     display:block;       
+     height:0;       
+     clear:both;       
+     visibility:hidden;       
+}
+.clearfix{*zoom:1}
+.num_box{position:relative;}
+.num{color:#90C;font-size:50px;width:100%;text-align:center;position:relative;}
+.num p{position:absolute;top:0;left:50%;margin-left:-66px;}
+.num ul{width:100%;position:absolute;left:0;top:0;height:100%;}
+.num ul li{float:left;height:100%;position:relative;}
+/*#num_0{background:url(../images/bac1.jpg) no-repeat center ;background-size:100% 100%;}*/
+/*#num_1{background:url(../images/bac2.jpg) no-repeat center ;background-size:100% 100%;}
+#num_2{background:url(../images/bac3.jpg) no-repeat center ;background-size:100% 100%;}*/
+
+.fixed_r{position:absolute;right:10px;top:45%;z-index:9999;}
+.fixed_r li{width:14px;height:14px;border-radius:14px;-moz-border-radius:14px; -webkit-border-radius:14px; border:1px dotted #fff;line-height:40px;color:#333;font-size:16px;text-align:center;cursor:pointer; margin-top:20px;behavior: url(iecss3.htc);position:relative; z-index:2;}
+.fixed_r li.on{width:14px;height:14px;background:#fff;  background:rgba(255, 255, 255, 0.5) none repeat scroll 0 0 !important;/*实现FF背景透明，文字不透明*/
+filter:Alpha(opacity=60); background:#fff;/*实现IE背景透明*/}
+
+/* top */
+.fixed_top{position:fixed;top:0px;z-index:999; width:100%; padding:12px;}
+.fixed_top img{  padding:2px 16px; background:f5f5f5; }
+.button_top{ width:120px; background:#ff9418; height:36px; line-height:36px; color:#fff; font-size:20px;border-radius: 6px;-moz-border-radius:6px; -webkit-border-radius:6px; text-align:center; font-weight:400; float:right; margin:8px;}
+.button_top:hover{ background:#f18406;}
+/*01自动轮番滚动*/
+#slide_box{width:100%;height:100%;position:absolute;left:0;}
+#slide_box .slide_img{display:inline-block;white-space:nowrap;height:auto;width:auto;position:absolute;left:0;top:0;height:100%;position:relative;}
+#slide_box .slide_img li{display:block;float:left;height:100%;position:relative;}
+#slide_box .slide_img .s_img01{background:url(../images/bac1.jpg) no-repeat center;background-size:100% 100%;}
+#slide_box .slide_img .s_img02{background:url(../images/1-2_02.jpg) no-repeat center;background-size:100% 100%;}
+#slide_box .slide_img li img{max-width:100%;}
+#slide_order{text-align:right;padding-right:1em;position:absolute; max-width:100px; margin:auto;}
+/*系列号样式*/
+#slide_order a{display:block;float:left;margin-right:8px;border:1px solid #ddd;border-radius:4px;box-shadow:1px 1px 2px #666;background:#666;opacity:0.5;filter:alpha(opacity=50); position:relative; bottom:0; height:8px;overflow:hidden; margin-bottom:6px;}
+#slide_order a:hover,#slide_order a.current{color:#FFF;font-weight:700;border-color:#000;background-color:#000;}
+#slide_order{position:absolute;right:0; left:0; bottom:0;z-index:999;}
+
+
+/*.i-hzhb .rzwl{ width:501px; float:right;}*/
+.center { max-width:1003px;
+margin: 0 auto; width:100%;
+position: relative;
+}
+.i-hzhb {font-size:0.9rem;color: #000;}
+.i-hzhb dl{ padding:20% 0; height:100%; width:100%;}
+.i-hzhb dt{ width:50%;  padding:2rem 0; text-align:center; margin:auto; font-size:1.2rem;color:#fff;}
+.i-hzhb dd{ float:left; width:15%; margin:0.4rem; text-align:center;}
+.i-hzhb dl dd img{ width:100%; margin-bottom:0.4rem;}
+.i-hzhb dl dd a{ color:#fff;}
+.i-hzhb dd img:hover{-webkit-transform: scale(1.1) rotate(2deg);}
